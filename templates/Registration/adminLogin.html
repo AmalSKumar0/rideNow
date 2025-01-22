@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+</head>
+<body>
+    <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+        <defs>
+            <style>
+                @keyframes rotate {
+                         0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+                .out-top {
+                    animation: rotate 20s linear infinite;
+                    transform-origin: 13px 25px;
+                }
+                .in-top {
+                    animation: rotate 10s linear infinite;
+                    transform-origin: 13px 25px;
+                }
+                .out-bottom {
+                    animation: rotate 25s linear infinite;
+                    transform-origin: 84px 93px;
+                }
+                .in-bottom {
+                    animation: rotate 15s linear infinite;
+                    transform-origin: 84px 93px;
+                }
+            </style>
+        </defs>
+        <defs>
+            <linearGradient id="top-bottom-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#f9ac83" />
+                <stop offset="100%" stop-color="#f9ef86" />
+            </linearGradient>
+        </defs>
+    
+        <!-- Top Path -->
+        <path fill="url(#top-bottom-gradient)" class="in-top" d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
+    
+        <!-- Bottom Path -->
+        <path fill="url(#top-bottom-gradient)" class="in-bottom" d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
+    
+    </svg>
+    <!-- <div class="container"> -->
+    <div class="form">
+        <div class="header">
+            <h2>Welcome back</h2>
+           </div>
+        <div class="body">
+            <div class="steps">
+                <div class="step">
+                    <h4>Welcome back</h4>
+                    <p>Login back into your profile using your Email and password</p>
+                <div class="grid">
+                    <div class="col">
+                        <label for="email">Email</label>
+                        <input type="email" id="email">
+                    </div>
+                    <div class="col">
+                        <label for="Password">Password</label>
+                        <input type="Password" id="Password">
+                    </div>
+                </div>    
+                <br><br><br>
+                <div class="confirmation">
+                    <div>
+                        <button>Login</button>
+                    </div>
+                </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+</body>
+
+</html>

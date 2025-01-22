@@ -1,0 +1,3 @@
+DEBUG 2025-01-21 12:33:40,278 autoreload File D:\Fullstack Projects\rideNow\rideNow\settings.py previous mtime: 1737436393.155719, current mtime: 1737443019.2766612
+DEBUG 2025-01-21 12:33:40,278 autoreload D:\Fullstack Projects\rideNow\rideNow\settings.py notified as changed. Signal results: [(<function template_changed at 0x0000017B5B60F7E0>, None), (<function translation_file_changed at 0x0000017B5C56DF80>, None)].
+INFO 2025-01-21 12:33:40,279 autoreload D:\Fullstack Projects\rideNow\rideNow\settings.py changed, reloading.

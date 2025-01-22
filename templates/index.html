@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+    <title>RIDENOW</title>
+  </head>
+  <body>
+<nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="#">RIDE<span>NOW</span>.</a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <span><i class="ri-menu-line"></i></span>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <!-- <li><a href="#">Destination</a></li> -->
+        <li><a href="" style="color:#ff833e;">Home</a></li>
+        <li><a href="" >About Us</a></li>
+        <li><a href="#" id="testimoniesButton">Reviews</a></li>
+        <li><a href="PassReg.php" >Ride now</a></li>
+        <!-- <li><a href="#" id="aboutusButton">Contact us</a></li> -->
+      </ul>
+      <div class="nav__btns">
+      <a href="{% url 'contact' %}" class="btn sign__in">Contact us</a>
+      </div>
+    </nav>
+    <br>
+    <header class="header__container">
+      <div class="header__image">
+        <div class="header__image__card header__image__card-1">
+          <span><i class="ri-key-line"></i></span>
+          Taxi Booking
+        </div>
+        <div class="header__image__card header__image__card-2">
+          <span><a href="{% url 'adminLogin' %}"><i class="ri-passport-line"></i></span>
+          Affordable</a>
+        </div>
+        <div class="header__image__card header__image__card-3">
+          <span><i class="ri-map-2-line"></i></span>
+          Anywhere
+        </div>
+        <div class="header__image__card header__image__card-4">
+          <span><i class="ri-guide-line"></i></span>
+          On time
+        </div>
+        <img class="auto-pic" src="{% static 'images/header.png' %}" alt="header" />
+      </div>
+      <div class="header__content">
+        <h1>LETS GO!<br/><span>QUICK</span> <span>RIDES</span> FOR<br> A FASTER LIFE</h1>
+        <p>
+          Start Your Ride Today and Explore the City <br>     - Your Adventure Awaits with Convenient Journeys, Memorable Stops, and Endless Possibilities!
+        </p>
+        <div class="container">
+          <div class="input__row">
+            <a class="passenger" href="{%  url 'passengerLogin' %}">I'M A PASSENGER</a><a class="driver" href="{% url 'driverLogin' %}">I'M A DRIVER</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <br><br><br><br>
+     <!--Testimonials-->
+     <aside id="testimonials" class="scrollto text-center" data-enllax-ratio=".2">
+
+      <div class="row clearfix" id="testimoniesSection">
+
+          <div class="section-heading">
+              <h3>FEEDBACK</h3>
+              <h2 class="section-title">What our customers are saying</h2>
+          </div>
+        <div class="testcon">
+          <!--User Testimonial-->
+          <blockquote class="col-3 testimonial classic john" >
+              <img class="imgu" src="{% static 'images/user-images/user-1.jpg' %}" alt="User"/>
+              <q>This auto rickshaw booking app is fantastic! It’s super easy to use, and the drivers are always punctual. Highly recommend it for anyone needing a quick ride around town!</q>
+              <footer>John Doe - Happy Customer</footer>
+          </blockquote>
+          <!-- End of Testimonial-->
+
+          <!--User Testimonial-->
+          <blockquote class="col-3 testimonial classic user2">
+              <img class="imgu" src="{% static 'images/user-images/user-2.jpg' %}" alt="User"/>
+              <q>I’ve tried several rickshaw apps, but this one stands out. The interface is clean, and the booking process is seamless. Plus, the drivers are friendly and reliable.</q>
+              <footer>Emily Johnson - Happy Customer</footer>
+          </blockquote>
+          <!-- End of Testimonial-->
+
+          <!--User Testimonial-->
+          <blockquote class="col-3 testimonial classic user3">
+              <img class="imgu" src="{% static 'images/user-images/user-3.jpg' %}" alt="User"/>
+              <q>Great app with a user-friendly design! I love how quickly I can book a ride and track my rickshaw in real-time. It’s made my daily commute so much smoother.</q>
+              <footer>John Smith - Happy Customer</footer>
+          </blockquote>
+        </div>
+          <!-- End of Testimonial-->
+ 
+      </div>
+      <br><br><br><br>
+  </aside>
+</div>
+<footer class="f2" id="aboutusSection">
+    <div class="footer">
+    <div class="footer-col">
+        <h3>Kottayam Headquarters</h3>
+        <p>MES college</p>
+        <p>Erumely</p>
+        <p>T: +91 987654321</p>
+        <a href="https://maps.app.goo.gl/1nx6H5m2rmXPvYLn7">Get Directions</a>
+    </div>
+    <div class="footer-col">
+        <h3>Join Our Social Community</h3>
+        <ul class="social-icons">
+          <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+          <li><a href="#"><i class="fab fa-github"></i></a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i></a></li> 
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h3>Let's Discuss What's Next</h3>
+        <p>Have a project or a question? We'd love to hear from you.</p>
+        <p>Contact Us:</p>
+        <p>Email: rikshawhub@gmail.com</p>
+        <p>Phone: +91 987654321</p>
+    </div>
+    <hr>
+    <p class="rights">Copyright &copy; 2024 RikshawHub</p>
+</footer>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
+  </body>
+</html>

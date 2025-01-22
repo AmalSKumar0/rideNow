@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+</head>
+<body>
+    <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+        <defs>
+            <style>
+                @keyframes rotate {
+                         0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+                .out-top {
+                    animation: rotate 20s linear infinite;
+                    transform-origin: 13px 25px;
+                }
+                .in-top {
+                    animation: rotate 10s linear infinite;
+                    transform-origin: 13px 25px;
+                }
+                .out-bottom {
+                    animation: rotate 25s linear infinite;
+                    transform-origin: 84px 93px;
+                }
+                .in-bottom {
+                    animation: rotate 15s linear infinite;
+                    transform-origin: 84px 93px;
+                }
+            </style>
+        </defs>
+        <defs>
+            <linearGradient id="top-bottom-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#f9ac83" />
+                <stop offset="100%" stop-color="#f9ef86" />
+            </linearGradient>
+        </defs>
+    
+        <!-- Top Path -->
+        <path fill="url(#top-bottom-gradient)" class="in-top" d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
+    
+        <!-- Bottom Path -->
+        <path fill="url(#top-bottom-gradient)" class="in-bottom" d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
+    
+    </svg>
+    <!-- <div class="container"> -->
+    <div class="form">
+        <div class="header">
+            <h2>Create an account</h2>
+            <p>Register to become part of our community, already a passenger?<a href="{%  url 'passengerLogin' %}">Login</a></p>
+        </div>
+        <div class="body">
+            <div class="pagination">
+                <div class="number active">1</div>
+                <div class="bar"></div>
+                <div class="number">2</div>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="steps">
+                <div class="step">
+                    <h4>Passenger details</h4>
+                    <p>Basic information of the Passenger.</p>
+                    <div class="grid">
+                        <div class="col">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="col">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="col">
+                            <label for="phone">Phone no</label>
+                            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="col">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" placeholder="Enter your address" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <h4>Account security</h4>
+                    <p>Create a Password to complete the registration</p>
+                <div class="grid">
+                    <div class="col">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="col">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+                    </div>
+                </div>    
+                <br><br><br>
+                <div class="confirmation">
+                    <div>
+                        <button>Create account</button>
+                    </div>
+                </div>    
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="footer">
+            <button class="prev" disabled>Previous</button>
+            <button class="next">Next</button>
+        </div>
+    </div>
+<!-- </div> -->
+</body>
+<script>
+   (function(){
+	let currentPage = 1;
+	const prevBtn = document.querySelector(".form .footer .prev");
+	const nextBtn = document.querySelector(".form .footer .next");
+	function movePage(){
+		prevBtn.disabled = false;
+		nextBtn.disabled = false;
+		if(currentPage === 1){
+			prevBtn.disabled = true;
+		} else if(currentPage === 2){
+			nextBtn.disabled = true;
+		}
+		document.querySelector(".form .pagination .active").classList.remove("active");
+		document.querySelectorAll(".form .pagination .number")[currentPage-1].classList.add("active");
+		const stepNode = document.querySelector(".form .steps .step");
+		const width = ((currentPage-1)*stepNode.offsetWidth*-1)+"px";
+		stepNode.parentNode.style.marginLeft = width;
+	}
+	prevBtn.addEventListener("click",function(){
+		currentPage -= 1;
+		movePage();
+	});
+	nextBtn.addEventListener("click",function(){
+		currentPage += 1;
+		movePage();
+	});
+})();
+</script>
+</html>

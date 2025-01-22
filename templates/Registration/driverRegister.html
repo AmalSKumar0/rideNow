@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+</head>
+<body>
+    <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+        <defs>
+            <style>
+                @keyframes rotate {
+                         0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+                .out-top {
+                    animation: rotate 20s linear infinite;
+                    transform-origin: 13px 25px;
+                }
+                .in-top {
+                    animation: rotate 10s linear infinite;
+                    transform-origin: 13px 25px;
+                }
+                .out-bottom {
+                    animation: rotate 25s linear infinite;
+                    transform-origin: 84px 93px;
+                }
+                .in-bottom {
+                    animation: rotate 15s linear infinite;
+                    transform-origin: 84px 93px;
+                }
+            </style>
+        </defs>
+        <defs>
+            <linearGradient id="top-bottom-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#f9ac83" />
+                <stop offset="100%" stop-color="#f9ef86" />
+            </linearGradient>
+        </defs>
+    
+        <!-- Top Path -->
+        <path fill="url(#top-bottom-gradient)" class="in-top" d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
+    
+        <!-- Bottom Path -->
+        <path fill="url(#top-bottom-gradient)" class="in-bottom" d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
+    
+    </svg>
+    <!-- <div class="container"> -->
+    <div class="form">
+        <div class="header">
+            <h2>Create an account</h2>
+            <p>Register to become part of our driver community, already a member?<a href="{% url 'driverLogin' %}">Login</a></p>
+        </div>
+        <div class="body">
+            <div class="pagination">
+                <div class="number active">1</div>
+                <div class="bar"></div>
+                <div class="number">2</div>
+                <div class="bar"></div>
+                <div class="number">3</div>
+                <div class="bar"></div>
+                <div class="number">4</div>
+            </div><br>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="steps">
+                    <!-- Step 1: Driver Details -->
+                    <div class="step">
+                        <h4>Driver details</h4>
+                        <p>Basic information of the vehicle owner.</p>
+                        <div class="grid">
+                            <div class="col">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="col">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="col">
+                                <label for="phone">Phone no</label>
+                                <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+                            </div>
+                            <div class="col">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" name="address" placeholder="Enter your address" required>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Step 2: Vehicle Type -->
+                    <div class="step">
+                        <h4>Type of vehicle</h4>
+                        <p>Enter the type of vehicle you want to register to our website</p>
+                        <div class="grid">
+                            <div class="col">
+                                <div class="checkbox">
+                                    <input type="radio" id="auto" name="vehicle_type" value="Auto Rickshaw" required>
+                                    <label for="auto">Auto Rickshaw</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="checkbox">
+                                    <input type="radio" id="economy_car" name="vehicle_type" value="Economy Car">
+                                    <label for="economy_car">Economy Car</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="checkbox">
+                                    <input type="radio" id="sedan" name="vehicle_type" value="Sedan">
+                                    <label for="sedan">Sedan</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="checkbox">
+                                    <input type="radio" id="luxury_car" name="vehicle_type" value="Luxury Car">
+                                    <label for="luxury_car">Luxury Car</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Step 3: Vehicle Information -->
+                    <div class="step">
+                        <h4>Vehicle Information</h4>
+                        <p>Enter the details of the vehicle you want to register.</p>
+                        <div class="grid">
+                            <div class="col">
+                                <label for="manufacture_date">Date of Manufacture</label>
+                                <input type="date" id="manufacture_date" name="manufacture_date" required>
+                            </div>
+                            <div class="col">
+                                <label for="license_number">License Number</label>
+                                <input type="text" id="license_number" name="license_number" placeholder="Enter your license number" required>
+                            </div>
+                            <div class="col">
+                                <label for="vehicle_number">Vehicle Number</label>
+                                <input type="text" id="vehicle_number" name="vehicle_number" placeholder="Enter your vehicle number" required>
+                            </div>
+                            <div class="col">
+                                <label for="vehicle_image">Vehicle Image</label>
+                                <input type="file" id="vehicle_image" name="vehicle_image" accept="image/*" required>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Step 4: Account Security -->
+                    <div class="step">
+                        <h4>Account security</h4>
+                        <p>Create a password to complete the registration.</p>
+                        <div class="grid">
+                            <div class="col">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                            </div>
+                            <div class="col">
+                                <label for="confirm_password">Confirm Password</label>
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Submit Button -->
+                    <div class="confirmation">
+                        <button type="submit">Create Account</button>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- </div> -->
+        </div>
+        <div class="footer">
+            <button class="prev" disabled>Previous</button>
+            <button class="next">Next</button>
+        </div>
+    </div>
+<!-- </div> -->
+</body>
+<script src="{% static 'scripts/login.js' %}"></script>
+</html>

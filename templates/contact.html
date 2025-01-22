@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+    <title>RICKSHAWHUB</title>
+  </head>
+  <body>
+<link rel="stylesheet" href="{% static 'styles/contact.css' %}">
+<!-- landing page of our website -->
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="#">RICKSHAW<span>HUB</span>.</a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <span><i class="ri-menu-line"></i></span>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <!-- <li><a href="#">Destination</a></li> -->
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="" >About Us</a></li>
+        <li><a href="#" id="testimoniesButton">Reviews</a></li>
+        <li><a href="PassReg.php" style="color:#ff833e;">Contact us</a></li>
+        <!-- <li><a href="#" id="aboutusButton">Contact us</a></li> -->
+      </ul>
+      <div class="nav__btns">
+      <a href="PassReg.php" class="btn sign__in">Login/Signin</a>
+      </div>
+    </nav>
+    <section>
+            <div class="container">
+                <div class="contactInfo"> 
+                    <div>
+                        <h2>Contact Info</h2>
+                        <ul class="info">
+                            <li>
+                                <span><img src="images/icons/location.png"></span>
+                                <span>MES college <br>
+                                    Erumely<br>
+                                    Kottayam</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span><img src="images/icons/mail.png"></span>
+                                <!-- <span>nassosanagn@gmail.com</span> -->
+                                <span><a href = "mailto: rickshawhub@gmail.com">rickshawhub@gmail.com</a></span>
+                            </li>
+                            <li>
+                                <span><img src="images/icons/call.png"></span>
+                                <span>+91 98765 4321</span>
+                            </li>
+
+                        </ul>
+                    </div>
+                   
+                </div>
+                    <div class="contactForm">
+                        <h2>Send a Message</h2>
+                        <div class="formBox">
+                        <div class="inputBox w50">
+                            <input type="text" name="" required>
+                            <span>First Name</span>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="text" required>
+                            <span>Last Name</span>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="email" required>
+                            <span>Email Address</span>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="text" required>
+                            <span>Mobile Number</span>
+                        </div>
+                        <div class="inputBox w100">
+                            <textarea required></textarea>
+                            <span>Write your message here...</span>
+                        </div>
+                        <div class="inputBox w100">
+                            <input type="submit" value="Send">
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <footer class="f2" id="aboutusSection">
+            <div class="footer">
+            <div class="footer-col">
+                <h3>Kottayam Headquarters</h3>
+                <p>MES college</p>
+                <p>Erumely</p>
+                <p>T: +91 987654321</p>
+                <a href="https://maps.app.goo.gl/1nx6H5m2rmXPvYLn7">Get Directions</a>
+            </div>
+            <div class="footer-col">
+                <h3>Join Our Social Community</h3>
+                <ul class="social-icons">
+                  <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                  <li><a href="#"><i class="fab fa-github"></i></a></li>
+                  <li><a href="#"><i class="fab fa-instagram"></i></a></li> 
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Let's Discuss What's Next</h3>
+                <p>Have a project or a question? We'd love to hear from you.</p>
+                <p>Contact Us:</p>
+                <p>Email: rikshawhub@gmail.com</p>
+                <p>Phone: +91 987654321</p>
+            </div>
+            <hr>
+            <p class="rights">Copyright &copy; 2024 RikshawHub</p>
+        </footer>
+            <script src="https://unpkg.com/scrollreveal"></script>
+            <script src="{% static 'scripts/main.js' %}"></script>
+          </body>
+        </html>
+        
