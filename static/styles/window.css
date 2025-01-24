@@ -1,0 +1,208 @@
+:root {
+  --primary-color: #ff833e;
+  --primary-color-dark: #db6f35;
+  --text-dark: #333333;
+  --text-light: #767268;
+  --white: #ffffff;
+  --max-width: 1350px;
+  --header-font: "Bebas Neue", sans-serif;
+}
+
+.paycard {
+    background-color: rgba(51, 51, 51, 0.26); /* Updated for better transparency */
+    position: fixed; /* Fixes the element relative to the viewport */
+    z-index: 5; /* Keeps it above other content */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
+    backdrop-filter: blur(5px); /* Adds blur to the background */
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    top: 0; /* Aligns the top of the paycard to the top of the viewport */
+    left: 0; /* Aligns the left side to the left of the viewport */
+}
+
+
+.payment-card,.thankyou {
+    position: relative;
+  top: 0%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 750px; /* Fixed width */
+  height: auto; /* Fixed height */
+  margin: 0 auto;
+  overflow: hidden;
+  animation: fadeIn .5s ease-in;
+}
+@keyframes fadeIn {
+  from {
+      opacity: 0;   /* Element is fully transparent at the start */
+  }
+  to {
+      opacity: 1;   /* Element is fully visible at the end */
+  }
+}
+.left-section {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  max-height: 100%;
+}
+
+.car-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image-container {
+  width: 100%;
+  height: 300px; /* Fixed dimensions */
+  overflow: hidden; /* Hide overflow */
+  margin-right: 20px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.car-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image scales to fit container */
+}
+
+.car-details {
+  line-height: 1.5;
+}
+
+.car-details h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.car-details h3 {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.car-specs {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ebebeb;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 100%;
+}
+
+.specs-left, .specs-right {
+    flex: 1;
+    padding: 10px;
+}
+
+.specs-left p, .specs-right p {
+    /* margin-bottom: 30px; */
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+
+.specs-left {
+    text-align: left;
+}
+
+
+
+#paymentbuttons{
+  position: relative;
+  left: 1%;
+  top: 20px;
+}
+
+.car-specs p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.right-section {
+  width: 38%;
+  padding-left: 20px;
+  border-left: 2px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.right-section h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.payment-info p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.purchase-button,.back-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  width: 48%;
+}
+
+.purchase-button:hover,.back-button:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.gif{
+    height: 200px;
+}
+.cardThank {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.card-content-thank h2 {
+  color: var(--primary-color);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card-content-thank p {
+  color: #333;
+  font-size: 18px;
+}
+.card-content-thank form{
+  align-items: center;
+}
+
+.amount {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.go-back-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 200px;
+}
+
+.go-back-btn:hover {
+  background-color: var(--primary-color-dark);
+}
+

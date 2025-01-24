@@ -76,7 +76,11 @@
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
                 </div>  
-              
+                {% if err %}
+                <script>
+                    alert("{{err}}");
+                </script>
+                {% endif %}
                 <br><br><br>
                 <div class="confirmation">
                     <div>

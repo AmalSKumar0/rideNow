@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>{% load static %}
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+    <title>RICKSHAWHUB</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/LoginReg.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="area">
+  <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+  </ul>
+</div>
+<div class="wrapper">
+    <div class="inner">
+        <div class="image-holder">
+            <img src="{% static 'images/registration-form.jpg' %}" alt="">
+        </div>
+        <a href="{% url 'profile' %}" class="cross"></a>
+        <form method="post" action="{% url 'passengerLogin' %}" class="disable">
+            {% csrf_token %}
+            <h3>Passenger <span>Registration</span></h3>
+             <!-- Name Field -->
+                <div class="form-wrapper">
+                    {{ RegisterForm.name }}
+                    <i class="zmdi zmdi-account"></i>
+                </div>
+            
+                <!-- Email Field -->
+                <div class="form-wrapper">
+                    {{ RegisterForm.email }}
+                    <i class="zmdi zmdi-email"></i>
+                </div>
+            
+                <!-- Gender Field -->
+                <div class="form-wrapper">
+                    {{ RegisterForm.gender }}
+                    <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                </div>
+            
+                <!-- Address Field -->
+                <div class="form-wrapper">
+                    {{ RegisterForm.address }}
+                    <i class="zmdi zmdi-home"></i>
+                </div>
+            
+                <!-- Phone Field -->
+                <div class="form-wrapper">
+                    {{ RegisterForm.phone }}
+                    <i class="zmdi zmdi-phone"></i>
+                </div>
+            
+                <!-- Password Fields -->
+                <div class="form-wrapper">
+                    {{ RegisterForm.password }}
+                    {{ RegisterForm.confirm_password }}
+                    <i class="zmdi zmdi-lock"></i>
+                </div>
+            
+                <!-- Display any error messages -->
+                <h5 class="error">{{ err }}</h5>
+            
+                    <div class="buttons">
+            <button fdprocessedid="lfyluc" value="submit" name="Register">Update
+            </button>
+            </form>
+    </div>
+</div>
+<script>
+    let cross = document.querySelector('.cross');
+cross.innerHTML = "\u00d7";
+
+</script>  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+</body>
+</html>

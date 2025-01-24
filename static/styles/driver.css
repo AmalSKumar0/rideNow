@@ -1,0 +1,67 @@
+.searchcard{
+    height:170px;
+}
+.searchcard-content{
+    position: relative;
+    left: calc(3%*2);
+}
+.line{
+    position: relative;
+    left: 20px;top: 0px;
+    height: 100%;
+}
+.cardCont{
+    padding-bottom: 20px;
+}
+.find-button{
+    position: relative;
+    top: 12px;
+    width: auto;
+}
+.search{
+    padding: 0%;
+    position: relative;
+    top: 2px;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+}
+.onlive{
+    position: relative;
+    width: 30%;
+    left: 37%;
+    text-align: center;
+}
+.offline{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    width: 190px;
+}
+.offline:hover{
+    background-color: var(--primary-color-dark);
+    border: solid var(--primary-color-dark);
+}
+.card{
+    border: 2px solid rgb(27, 24, 24)
+}
+.display{
+    display:none;
+}
+.confirmcard{
+    height: 250px;
+}
+.confirm-details{
+    position: relative;
+    left: -21px;
+}
+.confirm-btn{
+    position: relative;
+    height: 20%;
+}
+.request-title{
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 20px;
+}

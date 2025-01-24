@@ -72,7 +72,12 @@
                         <label for="Password">Password</label>
                         <input type="Password" id="Password">
                     </div>
-                </div>    
+                </div> 
+                {% if err %}
+                <script>
+                    alert("{{err}}");
+                </script>
+                {% endif %}   
                 <br><br><br>
                 <div class="confirmation">
                     <div>

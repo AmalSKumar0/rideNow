@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+    <title>RICKSHAWHUB</title>
+  </head>
+  <body>
+<link rel="stylesheet" href="{% static 'styles/passenger.css' %}">
+<link rel="stylesheet" href="{% static 'styles/displayCards.css' %}">
+<link rel="stylesheet" href="{% static 'styles/DisplayBox.css' %}">
+<link rel="stylesheet" href="{% static 'styles/driver.css' %}">
+<nav>
+    <div class="nav__header">
+        <div class="nav__logo">
+            <a href="#">RICKSHAW<span>HUB</span>.</a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+            <span><i class="ri-menu-line"></i></span>
+        </div>
+    </div>
+    <ul class="nav__links" id="nav-links">
+        <!-- <li><a href="#">Destination</a></li> -->
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#" id="testimoniesButton">Reviews</a></li>
+        <li><a href="" id="aboutusButton">Contact us</a></li>
+    </ul>
+    <div class="admin"><a href="profile.php">
+         <div class="circle"><img class="pfp-auto" src="{% static 'images/' %}{{detail.auto_img}}" alt="profile pic"></div>
+            <span>{{detail.name}}</span> </a>
+    </div>
+</nav>
+
+<div class="booking-section">
+    <!-- booking section -->
+    <h1 class="TagLine">BE THE <span class='ride'>DIFFERENCE</span> ON EVERY ROAD</h1>
+    <div class="cardCont {% if flag != 1 %}display{% endif %}">
+        <div class="searchcard">
+            <svg class="line" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50,0 L50,300" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+            </svg>
+            <div class="searchcard-content">
+                <h2 class="searchcard-title">LET EVERY PASSENGER KNOW—YOU'RE READY TO ROLL! </h2>
+                <form method="post" action="{% url 'driverpage' %}">
+                    {% csrf_token %}
+                    <div class="fromTo">
+                        <div class="form-group">
+                            <label for="from">Current location:</label>
+                            {{ form.location }}
+                            <div id="suggestions"></div>
+                            <div id="from-error" class="error-message"></div> <!-- Error Message -->
+                        </div>
+                        <div class="find-button">
+                            <button value="live" name="live" class="search">GO LIVE!</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% if flag == 3 or flag == 4 %}
+{% if flag == 4 %}
+   {% include 'driver/thankyou.html' %}
+{% endif %}
+{% if messages %}
+    {% for message in messages %}
+    <script> alert("{{ message }}"); </script>
+    {% endfor %}
+{% endif %}
+    <div class="cardCont">
+        <div class="searchcard confirmcard">
+            <svg class="line" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50,0 L50,300" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+            </svg>
+            <div class="searchcard-content">
+                <h2 class="searchcard-title">Your passenger is {{cur_pass.name}}</h2>
+                <p class="confirm-details">Phone no:{{cur_pass.phone}}</p>
+                <p class="confirm-details">Their landmark is {{cur_book.landmark}}</p>
+                <p class="confirm-details">The trip is from {{cur_book.from.split|first}} to {{cur_book.to.split|first}}</p>
+                <form>
+                    <div class="fromTo">
+                        <div class="form-group">
+                            <label for="from">Enter the 6-digit OTP:</label>
+                            <input type="number" name="otp" id="from" placeholder="OTP FOR CONFIRMATION" required>
+                        </div>
+                        <div class="find-button">
+                            <button value="true" name="completed" style="width: 170px;" class="search">COMPLETE
+                                TRIP</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<!-- // If $flag == 2 and session variable passWaitFlag is not set -->
+{% if flag == 2 %}
+    <div class="onlive">
+        <form style="display:inline;">
+            <button value="true" name="change" class="offline search"><span>CHANGE LOCATION</span></button>
+            <button value="true" name="offline" class="offline search">GO OFFLINE</button>
+        </form>
+    </div>
+    </div>
+    <h3 class="request-title">PASSENGERS REQUESTED YOUR AUTO</h3>
+    <div class="card-container">
+        {% if booking %}
+           {% for book in booking %}
+                <div class="card">
+                    <div class="card-content">
+                        <h3> TRIP from: {{ book.from_location.split|first }} 
+                            to: {{ book.to_location.split|first }}
+                        </h3>
+                        <p>Price: Rs{{book.price}}</p>
+                        <p>Distance:{{book.distance}} KM</p>
+                        <div class="button-group">
+                            <form style="display:inline;">
+                                <button name="cancel" value='{{book.pass_id}}'>Cancel</button>
+                                <button name="accept" value='{{book.pass_id}}'>Accept</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+       {%else%} No bookings available in {{from}}
+        {% endif %}
+   {% endif %}
+   </div>
+   <script src="{% static 'scripts/passenger.js' %}"></script>
+   <footer class="f2" id="aboutusSection">
+       <div class="footer">
+       <div class="footer-col">
+           <h3>Kottayam Headquarters</h3>
+           <p>MES college</p>
+           <p>Erumely</p>
+           <p>T: +91 987654321</p>
+           <a href="https://maps.app.goo.gl/1nx6H5m2rmXPvYLn7">Get Directions</a>
+       </div>
+       <div class="footer-col">
+           <h3>Join Our Social Community</h3>
+           <ul class="social-icons">
+             <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+             <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+             <li><a href="#"><i class="fab fa-github"></i></a></li>
+             <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+           </ul>
+       </div>
+       <div class="footer-col">
+           <h3>Let's Discuss What's Next</h3>
+           <p>Have a project or a question? We'd love to hear from you.</p>
+           <p>Contact Us:</p>
+           <p>Email: rikshawhub@gmail.com</p>
+           <p>Phone: +91 987654321</p>
+       </div>
+       <hr>
+       <p class="rights">Copyright &copy; 2024 RikshawHub</p>
+   </footer>
+       <script src="https://unpkg.com/scrollreveal"></script>
+       <script src="{% static 'scripts/main.js' %}"></script>
+     </body>
+   </html>
+   

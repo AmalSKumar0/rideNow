@@ -1,0 +1,519 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+:root {
+  --primary-color: #ff833e;
+  --primary-color-dark: #db6f35;
+  --text-dark: #333333;
+  --text-light: #767268;
+  --white: #ffffff;
+  --max-width: 1350px;
+  --header-font: "Bebas Neue", sans-serif;
+}
+.feedback {
+  --normal: #414052;
+  --normal-shadow: #313140;
+  --normal-shadow-top: #4c4b60;
+  --normal-mouth: #2e2e3d;
+  --normal-eye: #282734;
+  --active: #f8da69;
+  --active-shadow: #f4b555;
+  --active-shadow-top: #fff6d3;
+  --active-mouth: #f05136;
+  --active-eye: #313036;
+  --active-tear: #76b5e7;
+  --active-shadow-angry: #e94f1d;
+  --hover: #454456;
+  --hover-shadow-top: #59586b;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  label {
+    position: relative;
+    transition: transform 0.3s;
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+    input {
+      appearance: none;
+      outline: none;
+      border: none;
+      display: block;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      left: 0;
+      top: 0;
+      margin: 0;
+      padding: 0;
+      border-radius: 50%;
+      background: var(--sb, var(--normal));
+      box-shadow: inset 3px -3px 4px var(--sh, var(--normal-shadow)),
+        inset -1px 1px 2px var(--sht, var(--normal-shadow-top));
+      transition: background 0.4s, box-shadow 0.4s, transform 0.3s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    div {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      transform: perspective(240px) translateZ(4px);
+      svg,
+      &:before,
+      &:after {
+        display: block;
+        position: absolute;
+        left: var(--l, 9px);
+        top: var(--t, 13px);
+        width: var(--w, 8px);
+        height: var(--h, 1px);
+        transform: rotate(var(--r, 0deg)) scale(var(--sc, 1)) translateZ(0);
+      }
+      svg {
+        fill: none;
+        stroke: var(--s);
+        stroke-width: 1.5px;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: stroke 0.4s;
+        &.eye {
+          --s: var(--e, var(--normal-eye));
+          --t: 17px;
+          --w: 7px;
+          --h: 4px;
+          &.right {
+            --l: 23px;
+          }
+        }
+        &.mouth {
+          --s: var(--m, var(--normal-mouth));
+          --l: 11px;
+          --t: 23px;
+          --w: 18px;
+          --h: 7px;
+        }
+      }
+      &:before,
+      &:after {
+        content: "";
+        z-index: var(--zi, 1);
+        border-radius: var(--br, 1px);
+        background: var(--b, var(--e, var(--normal-eye)));
+        transition: background 0.4s;
+      }
+    }
+    &.angry {
+      --step-1-rx: -24deg;
+      --step-1-ry: 20deg;
+      --step-2-rx: -24deg;
+      --step-2-ry: -20deg;
+      div {
+        &:before {
+          --r: 20deg;
+        }
+        &:after {
+          --l: 23px;
+          --r: -20deg;
+        }
+        svg {
+          &.eye {
+            stroke-dasharray: 4.55;
+            stroke-dashoffset: 8.15;
+          }
+        }
+      }
+      input {
+        &:checked {
+          animation: angry 1s linear;
+          & + div {
+            &:before {
+              --middle-y: -2px;
+              --middle-r: 22deg;
+              animation: toggle 0.8s linear forwards;
+            }
+            &:after {
+              --middle-y: 1px;
+              --middle-r: -18deg;
+              animation: toggle 0.8s linear forwards;
+            }
+          }
+        }
+      }
+    }
+    &.sad {
+      --step-1-rx: 20deg;
+      --step-1-ry: -12deg;
+      --step-2-rx: -18deg;
+      --step-2-ry: 14deg;
+      div {
+        &:before,
+        &:after {
+          --b: var(--active-tear);
+          --sc: 0;
+          --w: 5px;
+          --h: 5px;
+          --t: 15px;
+          --br: 50%;
+        }
+        &:after {
+          --l: 25px;
+        }
+        svg {
+          &.eye {
+            --t: 16px;
+          }
+          &.mouth {
+            --t: 24px;
+            stroke-dasharray: 9.5;
+            stroke-dashoffset: 33.25;
+          }
+        }
+      }
+      input {
+        &:checked {
+          & + div {
+            &:before,
+            &:after {
+              animation: tear 0.6s linear forwards;
+            }
+          }
+        }
+      }
+    }
+    &.ok {
+      --step-1-rx: 4deg;
+      --step-1-ry: -22deg;
+      --step-1-rz: 6deg;
+      --step-2-rx: 4deg;
+      --step-2-ry: 22deg;
+      --step-2-rz: -6deg;
+      div {
+        &:before {
+          --l: 12px;
+          --t: 17px;
+          --h: 4px;
+          --w: 4px;
+          --br: 50%;
+          box-shadow: 12px 0 0 var(--e, var(--normal-eye));
+        }
+        &:after {
+          --l: 13px;
+          --t: 26px;
+          --w: 14px;
+          --h: 2px;
+          --br: 1px;
+          --b: var(--m, var(--normal-mouth));
+        }
+      }
+      input {
+        &:checked {
+          & + div {
+            &:before {
+              --middle-s-y: 0.35;
+              animation: toggle 0.2s linear forwards;
+            }
+            &:after {
+              --middle-s-x: 0.5;
+              animation: toggle 0.7s linear forwards;
+            }
+          }
+        }
+      }
+    }
+    &.good {
+      --step-1-rx: -14deg;
+      --step-1-rz: 10deg;
+      --step-2-rx: 10deg;
+      --step-2-rz: -8deg;
+      div {
+        &:before {
+          --b: var(--m, var(--normal-mouth));
+          --w: 5px;
+          --h: 5px;
+          --br: 50%;
+          --t: 22px;
+          --zi: 0;
+          opacity: 0.5;
+          box-shadow: 16px 0 0 var(--b);
+          filter: blur(2px);
+        }
+        &:after {
+          --sc: 0;
+        }
+        svg {
+          &.eye {
+            --t: 15px;
+            --sc: -1;
+            stroke-dasharray: 4.55;
+            stroke-dashoffset: 8.15;
+          }
+          &.mouth {
+            --t: 22px;
+            --sc: -1;
+            stroke-dasharray: 13.3;
+            stroke-dashoffset: 23.75;
+          }
+        }
+      }
+      input {
+        &:checked {
+          & + div {
+            svg {
+              &.mouth {
+                --middle-y: 1px;
+                --middle-s: -1;
+                animation: toggle 0.8s linear forwards;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.happy {
+      div {
+        --step-1-rx: 18deg;
+        --step-1-ry: 24deg;
+        --step-2-rx: 18deg;
+        --step-2-ry: -24deg;
+        &:before {
+          --sc: 0;
+        }
+        &:after {
+          --b: var(--m, var(--normal-mouth));
+          --l: 11px;
+          --t: 23px;
+          --w: 18px;
+          --h: 8px;
+          --br: 0 0 8px 8px;
+        }
+        svg {
+          &.eye {
+            --t: 14px;
+            --sc: -1;
+          }
+        }
+      }
+      input {
+        &:checked {
+          & + div {
+            &:after {
+              --middle-s-x: 0.95;
+              --middle-s-y: 0.75;
+              animation: toggle 0.8s linear forwards;
+            }
+          }
+        }
+      }
+    }
+    input {
+      &:checked {
+        --sb: var(--active);
+        --sh: var(--active-shadow);
+        --sht: var(--active-shadow-top);
+        & + div {
+          --m: var(--active-mouth);
+          --e: var(--active-eye);
+          animation: shake 0.8s linear forwards;
+        }
+      }
+      &:not(:checked) {
+        &:hover {
+          --sb: var(--hover);
+          --sht: var(--hover-shadow-top);
+        }
+        &:active {
+          transform: scale(0.925);
+          & + div {
+            transform: scale(0.925);
+          }
+        }
+      }
+    }
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+}
+
+@keyframes shake {
+  30% {
+    transform: perspective(240px) rotateX(var(--step-1-rx, 0deg))
+      rotateY(var(--step-1-ry, 0deg)) rotateZ(var(--step-1-rz, 0deg))
+      translateZ(10px);
+  }
+  60% {
+    transform: perspective(240px) rotateX(var(--step-2-rx, 0deg))
+      rotateY(var(--step-2-ry, 0deg)) rotateZ(var(--step-2-rz, 0deg))
+      translateZ(10px);
+  }
+  100% {
+    transform: perspective(240px) translateZ(4px);
+  }
+}
+
+@keyframes tear {
+  0% {
+    opacity: 0;
+    transform: translateY(-2px) scale(0) translateZ(0);
+  }
+  50% {
+    transform: translateY(12px) scale(0.6, 1.2) translateZ(0);
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(24px) translateX(4px) rotateZ(-30deg) scale(0.7, 1.1)
+      translateZ(0);
+  }
+}
+
+@keyframes toggle {
+  50% {
+    transform: translateY(var(--middle-y, 0))
+      scale(
+        var(--middle-s-x, var(--middle-s, 1)),
+        var(--middle-s-y, var(--middle-s, 1))
+      )
+      rotate(var(--middle-r, 0deg));
+  }
+}
+
+@keyframes angry {
+  40% {
+    background: var(--active);
+  }
+  45% {
+    box-shadow: inset 3px -3px 4px var(--active-shadow),
+      inset 0 8px 10px var(--active-shadow-angry);
+  }
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: inherit;
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+}
+
+// Center & dribbble
+body {
+  min-height: 100vh;
+  display: flex;
+  font-family: "Inter", Arial;
+  justify-content: center;
+  align-items: center;
+  background: #181820;
+  .twitter {
+    position: fixed;
+    display: block;
+    right: 12px;
+    bottom: 12px;
+    svg {
+      width: 32px;
+      height: 32px;
+      fill: #1da1f2;
+    }
+  }
+}
+
+.exterior {
+  background-color: rgba(
+    51,
+    51,
+    51,
+    0.26
+  ); /* Updated for better transparency */
+  position: fixed; /* Fixes the element relative to the viewport */
+  z-index: 5; /* Keeps it above other content */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  -webkit-backdrop-filter: blur(15px); /* For Safari support */
+  backdrop-filter: blur(5px); /* Adds blur to the background */
+  display: flex; /* Enables flexbox layout */
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  top: 0; /* Aligns the top of the paycard to the top of the viewport */
+  left: 0; /* Aligns the left side to the left of the viewport */
+  animation: fadeIn 0.5s ease-in;
+}
+.reviewBox {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  height: 55%;
+  width: 40%;
+  border-radius: 5vmin;
+  align-items: center;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Element is fully transparent at the start */
+  }
+  to {
+    opacity: 1; /* Element is fully visible at the end */
+  }
+}
+
+.feedback {
+  position: relative;
+  // top: 30px;
+  left: 29%;
+}
+.text {
+  color: var(--text-dark);
+  font: var(--header-font);
+  position: relative;
+  //  top: 20px;
+  font-size: 25px;
+  text-align: center;
+}
+.text span {
+  color: var(--primary-color);
+}
+
+textarea {
+  position: relative;
+  left: 13%;
+  // top: 60px;
+  width: 80%;
+  height: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid var(--text-light);
+  font-size: 16px;
+}
+.buttons {
+  left: 32%;
+  position: relative;
+  top: -10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  width: 250px;
+}
+button {
+  width: 48%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: var(--primary-color-dark);
+}
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+.back-btn {
+  background-color: var(--primary-color);
+  color: white;
+}

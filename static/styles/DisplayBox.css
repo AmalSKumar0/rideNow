@@ -1,0 +1,45 @@
+.status-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    margin-top: 10px;
+}
+
+.otp-message {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff6b6b;
+    margin-top: 10px;
+}
+
+.highlighted-otp {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.driver-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.trip-info {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.driver-details h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}

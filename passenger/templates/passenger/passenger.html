@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+    <title>RICKSHAWHUB</title>
+  </head>
+  <body>
+<link rel="stylesheet" href="{% static 'styles/passenger.css' %}">
+<link rel="stylesheet" href="{% static 'styles/displayCards.css' %}">
+<link rel="stylesheet" href="{% static 'styles/DisplayBox.css' %}">
+
+<nav>
+    <div class="nav__header">
+        <div class="nav__logo">
+            <a href="#">RICKSHAW<span>HUB</span>.</a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+            <span><i class="ri-menu-line"></i></span>
+        </div>
+    </div>
+    <ul class="nav__links" id="nav-links">
+        <!-- <li><a href="#">Destination</a></li> -->
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#" id="testimoniesButton">Reviews</a></li>
+        <li><a href="contact.php" id="aboutusButton">Contact us</a></li>
+    </ul>
+    <div class="admin"><a href="{% url 'profile' %}">
+        {% if passenger_details.gender == 'Male' %}
+    <img class="pfp" src="{% static 'images/man.png' %}" alt="profile pic">
+{% else %}
+    <img class="pfp" src="{% static 'images/woman.png' %}" alt="profile pic">
+{% endif %}
+
+        <span>{{ passenger_details.name }}</span>
+    </a>
+    </div>
+</nav>
+{% if flag == 4 %}
+{{ err }}
+{{error}}
+{% endif %}
+{% if paymentwindow == True %}
+<link rel="stylesheet" href="{% static 'styles/window.css' %}">
+<div class="paycard">
+<div class="payment-card">
+  <div class="left-section">
+  <h3>DRIVER DETAILS:</h3>
+    <div class="car-info">
+      <div class="image-container">
+        <img src="{% static 'images/' %}{{lookedupdriver.auto_img}}" alt="Car Image" class="car-image" />
+      </div>
+    </div>
+    
+    <div class="car-specs">
+    <div class="specs-left">
+        <p><strong>Name:</strong> {{lookedupdriver.name}} </p>
+        <p><strong>Gender:</strong> {{lookedupdriver.gender}} </p>
+        <p><strong>Address:</strong> {{lookedupdriver.address}} </p>
+    </div>
+    <div class="specs-right">
+        <p><strong>Rating:</strong> {{lookedupdriver.rating}} </p>
+        <p><strong>Licence No:</strong> {{lookedupdriver.licence}} </p>
+        <p><strong>Vehicle No:</strong> {{lookedupdriver.vehicle}} </p>
+    </div>
+</div>
+  </div>
+
+  <div class="right-section">
+  <img src="{% static 'images/Accept Evrything.gif' %}" alt="Car Image" class="gif" />
+    <h2>Payment detail</h2>
+    <div class="payment-info">
+      <p>Pyament to: {{lookedupdriver.name}}</p>
+      <p>From: {{from}} To: {{to}}</p>
+        <p>Subtotal: {{price}}</p>
+        <p>Total Distance: {{distance}}</p>
+        <p>Promo code: none</p>
+        <h3>Total: {{price}}</h3>
+    </div>
+    <form style="display: block; " id="paymentbuttons">
+            <button name="Back" onclick="window.location.href='?back=True'" value="true" class="back-button">Back</button>
+            <button name="BookDriver" onclick="window.location.href='?BookDriver={{lookedupdriver.driver_id}}'" value="{{lookedupdriver.driver_id}}" class="purchase-button">Book</button>
+    </form>
+  </div>
+</div>
+</div>
+
+{% endif %}
+<div class="booking-section into">
+    <!-- views based on the flags we mensioned before -->
+    <h1 class="TagLine">
+       {% if flag == 2 %} 
+            RICKSHAWS NEAR<span class='ride'> {{ from }}</span>
+       {% elif flag == 1 %}
+            Ready, Set,<span class='ride'> Ride!</span>
+        {% elif flag == 3 %}
+            YOUR <span class='ride'> RIKSHAW </span> is on the way
+        {% endif %}
+    </h1>
+    {% if flag == 2 %} 
+        <form class='anotherbtn'><button name="another_location" value="true" onclick="window.location.href='?another_location=true'" class='offline' >SEARCH ANOTHER PLACE </button></form>
+    {% endif %}
+    <div class="cardCont into {% if flag != 1 %} display {% endif %}">
+        <div class="searchcard">
+            <div class="searchcard-image">
+                <img src="{% static 'images/registration-form-12.jpg' %}" alt="">
+            </div>
+            <svg class="line" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50,0 L50,300" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+            </svg>
+            <div class="searchcard-content special-card">
+                <h2 class="searchcard-title">BOOK YOUR RICKSHAW </h2>
+                <!-- form for booking where data enter from,to and landmark for his trip -->
+                <form method="post" action="{% url 'passengerPage' %}">
+                    {% csrf_token %}
+                    {{POST_data}}
+                    <div class="fromTo">
+                        <div class="form-group">
+                            <label for="from">From</label>
+                            {{ searchForm.from_loc }}
+                            <div id="suggestions"></div>
+                            <div id="from-error" class="error-message"></div> <!-- Error Message -->
+                        </div>
+
+                        <!-- To Field -->
+                        <div class="form-group">
+                            <label for="to">To</label>
+                            {{ searchForm.to_loc }}
+                            <div id="suggestions2"></div>
+                            <div id="to-error" class="error-message"></div> <!-- Error Message -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="landmark">Landmark</label>
+                        {{ searchForm.landmark }}
+                    </div><br>
+                    <div class="find-button">
+                        <!-- search button will search the availabale rikshaw near the user -->
+                        <button type="submit" value="search" name="search" class="search">SEARCH</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if flag == 3 %}  
+    <div class="bookwindow cardCont">
+        <div class="searchcard">
+                 <!-- Fetching details of the driver that the passenger booked -->
+            <div class="dia into">
+                <img class="imageView" src="{% static 'images/' %}{{lookedupdriver.auto_img}}" alt="">
+            </div>
+            <svg class="line" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50,0 L50,300" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+            </svg>
+            <div class="searchcard-content passvie">
+                <div class='trip-info'>
+                    <h2 style="color: #ff833e;">
+                        TRIP: FROM
+                        {{from}}
+                        TO
+                        {{to}}
+                    </h2>
+                </div>
+                <div class='driver-details'>
+                    <h4>Driver Details</h4>
+                    <p>{{lookedupdriver.name}}</p>
+                    <p>Address: {{lookedupdriver.address}}</p>
+                    <p>Gender: {{lookedupdriver.gender}}</p>
+                    <p>Phone No: {{lookedupdriver.phone}}</p>
+                    <p>Email: {{lookedupdriver.email}}</p>
+                    <p>Vehicle No: <span class="vno">{{lookedupdriver.vehicle}}</span></p>
+                   {% if booking.status == 'requested' %}  
+                            <div class='status-message'>Rickshaw is requested</div>
+                    {% elif booking.status == 'accepted' %}
+                            <div class='status-message'>Rickshaw is on its way</div>
+                            <div class='otp-message'>Once you reach the destination, tell this OTP to the driver:</div>
+                            <div class='highlighted-otp'>{{booking.OTP}}</div>
+                    {% elif booking.status == 'canceled'%}
+                            <div class='status-message' style='color: #dc3545;'>Rickshaw is canceled</div>
+                    <form >
+                        <button class="confirm" name='confirm' value="false">Confirm</button>
+                    </form>
+                    {% elif booking.status == 'completed' %}
+                         <div class='status-message' style='color: #28a745;'>Passenger reached destination</div>
+                    <form style="display:flex;flex-direction:row;" method='get' class="button-review">
+                        <button class="search pass-confirm-button" name='review' value="True">Review</button>
+                        <button class="search pass-confirm-button" name='confirmTrip' value="{{booking.pass_id}}">Confirm</button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% if reviewFlag == True %}
+                    {% include 'passenger/review.html' %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<div class="card-container into">
+    {% if flag == 2 %} 
+    {% if driverInLocation %} 
+    {% for driver in driverInLocation %}
+    <div class="card">
+        <div class="card-image">
+            <!-- image of the auto available to the passenger -->
+            <img src="{% static 'images/' %}{{driver.auto_img}}" alt="{{driver.name}}">
+        </div>
+        <div class="card-content">
+            <h2>{{driver.name}}</h2>
+            <div class="section">
+                <p>Phone No: {{driver.phone}}</p>
+            </div>
+            <p>Email: {{driver.email}}</p>
+            <p>Vehicle No: <span class="vno">{{driver.vehicle}}</span></p>
+            <div class="button-group book-btn">
+                <form  style='display:inline;'>
+                    <button name="View" onclick="window.location.href='?view={{driver.driver_id}}'" value='{{driver.driver_id}}'>View</button>
+                    <button name="payment" onclick="window.location.href='?payment={{driver.driver_id}}'" value='{{driver.driver_id}}'>Book</button>
+                </form>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+        {% else %}
+            <div class='no-results'>No rickshaws available in your area. Please try searching a different location or try again later.</div>
+        {% endif %}  
+        {% endif %}  
+</div>
+</div>
+
+<script src="{% static 'scripts/passenger.js' %}"></script>
+<footer class="f2" id="aboutusSection">
+    <div class="footer">
+    <div class="footer-col">
+        <h3>Kottayam Headquarters</h3>
+        <p>MES college</p>
+        <p>Erumely</p>
+        <p>T: +91 987654321</p>
+        <a href="https://maps.app.goo.gl/1nx6H5m2rmXPvYLn7">Get Directions</a>
+    </div>
+    <div class="footer-col">
+        <h3>Join Our Social Community</h3>
+        <ul class="social-icons">
+          <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+          <li><a href="#"><i class="fab fa-github"></i></a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h3>Let's Discuss What's Next</h3>
+        <p>Have a project or a question? We'd love to hear from you.</p>
+        <p>Contact Us:</p>
+        <p>Email: rikshawhub@gmail.com</p>
+        <p>Phone: +91 987654321</p>
+    </div>
+    <hr>
+    <p class="rights">Copyright &copy; 2024 RikshawHub</p>
+</footer>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
+  </body>
+</html>

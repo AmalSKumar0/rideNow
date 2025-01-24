@@ -78,6 +78,11 @@
                 </div>  
               
                 <br><br><br>
+                {% if err %}
+                <script>
+                    alert("{{err}}");
+                </script>
+                {% endif %}
                 <div class="confirmation">
                     <div>
                         <button>Login</button>

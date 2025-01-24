@@ -1,10 +1,9 @@
 from django.shortcuts import *
 from django.http import HttpResponse
-# from .forms import DriverRegistrationForm
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password, make_password
 from driver.models import *
-from passenger.models import *
+from passenger.models import Passenger
 
 # from passenger.models import passenger
 # from driver.models import driver
@@ -12,39 +11,48 @@ from passenger.models import *
 def home(request):
     return render(request, 'index.html')
 
+def profile(request):
+    return render(request,'profile.html')
+
 def contact(request):
     return render(request, 'contact.html')
 
-def AdminLogin(request):
-    return HttpResponse('Admin Login')
+def admindash(request):
+    newdriver = NewDrivers.objects.all()
+    return render(request, 'adminMod/admin.html',{
+        'newdrivers':newdriver,
+    })
 
 def driverLogin(request):
+    err=""
     if request.method == 'POST':
             email = request.POST.get('email')
             password = request.POST.get('password')
             try:
                 driver = Drivers.objects.get(email=email)
                 if check_password(password, driver.password):
-                    # request.session['driver_id'] = driver.driver_id  # Save driver ID in session
-                    return redirect('driver')  # Redirect to the driver dashboard
+                    request.session['driver_id'] = driver.id  # Save driver ID in session
+                    return redirect('driverpage')  # Redirect to the driver dashboard
                 else:
                     err = "Incorrect password"
-            except Passengers.DoesNotExist:
+            except Drivers.DoesNotExist:
                  err = "User not found"
-    return render(request,'Registration/driverLogin.html')
+    return render(request,'Registration/driverLogin.html',{
+        'err':err
+    })
 
 def passLogin(request):
     if request.method == 'POST':
             email = request.POST.get('email')
             password = request.POST.get('password')
             try:
-                passenger = Passengers.objects.get(email=email)
+                passenger = Passenger.objects.get(email=email)
                 if check_password(password, passenger.password):
-                    # request.session['driver_id'] = driver.driver_id  # Save driver ID in session
-                    return redirect('driver')  # Redirect to the driver dashboard
+                    request.session['passenger_id'] = passenger.id  
+                    return redirect('passengerPage')  # Redirect to the driver dashboard
                 else:
                     err = "Incorrect password"
-            except Passengers.DoesNotExist:
+            except Passenger.DoesNotExist:
                  err = "User not found"
     return render(request,'Registration/passengerLogin.html')
 
@@ -63,7 +71,7 @@ def passRegister(request):
             return render(request, 'Registration/passengerRegister.html')
 
         # Save data to the database
-        Passengers.objects.create(
+        Passenger.objects.create(
             name=name,
             email=email,
             phone=phone,
@@ -72,7 +80,7 @@ def passRegister(request):
         )
 
         messages.success(request, "Account created successfully!")
-        return redirect('driver')
+        return redirect('passengerPage')
     return render(request,'Registration/passengerRegister.html')
 
 def driverReg(request):
@@ -95,7 +103,7 @@ def driverReg(request):
             return render(request, 'Registration/driverRegister.html')
 
         # Save data to the database
-        NewDrivers.objects.create(
+        Drivers.objects.create(
             name=name,
             email=email,
             phone=phone,
@@ -109,7 +117,7 @@ def driverReg(request):
         )
 
         messages.success(request, "Account created successfully!")
-        return redirect('driver')  # Replace with your success page or URL
+        return redirect('driverpage')  # Replace with your success page or URL
 
     return render(request, 'Registration/driverRegister.html')
 

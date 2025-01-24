@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Driver Registration</title>
+        {% load static %}
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" title="Favicon"/>
+        <link rel="stylesheet" href="{% static 'styles/LoginReg.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <!-- background animation -->
+<div class="area" >
+  <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+  </ul>
+</div >
+	<body>
+        <div class="wrapper" >
+        <div class="inner">
+        <div class="image-holder">
+        <img src="{% static 'images/registration-form.jpg' %}" alt="">
+        </div>
+        <a href="{% url 'home' %}" class="cross"></a>  
+        <!-- user registraion form -->
+        <form method="post" action="{% url 'passengerLogin' %}" class="disable">
+        {% csrf_token %}
+        <h3>Passenger <span>Registration</span></h3>
+         <!-- Name Field -->
+            <div class="form-wrapper">
+                {{ RegisterForm.name }}
+                <i class="zmdi zmdi-account"></i>
+            </div>
+        
+            <!-- Email Field -->
+            <div class="form-wrapper">
+                {{ RegisterForm.email }}
+                <i class="zmdi zmdi-email"></i>
+            </div>
+        
+            <!-- Gender Field -->
+            <div class="form-wrapper">
+                {{ RegisterForm.gender }}
+                <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+            </div>
+        
+            <!-- Address Field -->
+            <div class="form-wrapper">
+                {{ RegisterForm.address }}
+                <i class="zmdi zmdi-home"></i>
+            </div>
+        
+            <!-- Phone Field -->
+            <div class="form-wrapper">
+                {{ RegisterForm.phone }}
+                <i class="zmdi zmdi-phone"></i>
+            </div>
+        
+            <!-- Password Fields -->
+            <div class="form-wrapper">
+                {{ RegisterForm.password }}
+                {{ RegisterForm.confirm_password }}
+                <i class="zmdi zmdi-lock"></i>
+            </div>
+        
+            <!-- Display any error messages -->
+            <h5 class="error">{{ err }}</h5>
+        
+                <div class="buttons">
+        <button fdprocessedid="lfyluc" value="submit" name="Register">Register
+        </button>
+        <div class="logbtn">Login</div></div>
+        </form>
+        <!-- user login form -->
+        <form method="post" action="{% url 'passengerLogin' %}" class="login">
+            {% csrf_token %}
+            <h3 >Passenger <span>Login</span></h3>
+            <div class="form-wrapper">
+                {{ LoginForm.email_id }}
+              <i class="zmdi zmdi-email"></i>
+              </div>
+              
+              <div class="form-wrapper">
+                {{ LoginForm.password }}
+              <i class="zmdi zmdi-lock"></i>
+              </div>
+              <h5 class="error">{{err}}</h5>
+              {% if regForm.errors %}
+                <div class="error">
+                    {{ regForm.errors }}
+                </div>
+            {% endif %}
+            <div class="buttons">
+            <button fdprocessedid="lfyluc" value="submit" name="login">Login
+            </button><div class="regbtn">Register</div>
+            </div>
+            </form>
+        </div>
+        </div>
+        <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script src='{% static "scripts/reg.js" %}'></script>  
+    </body>
+</body>
+</html>
